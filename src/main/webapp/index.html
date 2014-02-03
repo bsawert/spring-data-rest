@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- load the bootstrap stylesheet -->
+  <link href="css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
+  <!-- load the libraries we need -->
+  <script type="text/javascript" src="js/libs/jquery.min.js"></script>
+  <script type="text/javascript" src="js/libs/underscore.min.js"></script>
+  <script type="text/javascript" src="js/libs/backbone.min.js"></script>
+  <!-- load our scripts -->
+  <script type="text/javascript" src="js/rsvp_router.js"></script>
+  <script type="text/javascript" src="js/models/rsvp_model.js"></script>
+  <script type="text/javascript" src="js/views/rsvp_index.js"></script>
+  <script type="text/javascript" src="js/views/rsvp_row.js"></script>
+  <script type="text/javascript" src="js/views/rsvp_new.js"></script>
+  <script type="text/javascript" src="js/views/rsvp_edit.js"></script>
+  <script type="text/javascript" src="js/views/rsvp_show.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Backbone RSVP Demo</h1>
+    </div>
+
+    <p class="lead">
+      This a demo of Backbone.JS and Spring Data Rest
+    </p>
+
+    <div class="row">
+      <div class="span6" id="primary-content">
+        <!-- the container that gets populated with the index -->
+      </div>
+      <div class="span6">
+          <!-- we are going to debug our backbone collection here -->
+          <code id="output" style="display:block;white-space:pre-wrap;"></code>
+      </div>
+    </div>
+
+  </div>
+  <!-- the form, used for create and edit -->
+  <script type="text/jst" id="formTemplate">
+    <div class="well">
+      <div class="alert alert-error" style="display:none;"></div>
+      <form>
+        <h2 class="form-signin-heading"></h2>
+        <div class="control-group">
+          <label for="name" class="control-label">Name</label>
+          <input type="text" class="input-block-level" name="name" placeholder="Name" value="<%= name %>" />
+        </div>
+        <div class="control-group">
+          <label for="email" class="control-label">Email</label>
+          <input type="text" class="input-block-level" name="email" placeholder="Email" value="<%= email %>" />
+        </div>
+        <div class="control-group">
+          <label for="guests" class="control-label">Guests</label>
+          <select class="form-control" name="guests" value="<%= guests %>">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+          </select>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="attend" <% if(attend) print("CHECKED"); %> /> Will attend
+            </label>
+        </div>
+        <div class="form-actions">
+          <button class="save btn btn-large btn-info" type="submit">Save</button> or
+          <a href="#rsvps/index" class="btn btn-large">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </script>
+  <!-- the index container -->
+  <script type="text/template" id="indexTemplate">
+    <div class="well">
+      <a class="btn btn-block btn-large btn-info" href="#rsvp/new">Enter New RSVP</a>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th width="20%">Name</th>
+          <th width="20%">Email</th>
+          <th>Guests</th>
+          <th>Attending</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </script>
+  <!-- the row template, renders once for each item in the index -->
+  <script type="text/template" id="rowTemplate">
+    <td>
+      <a href="#rsvp/<%= id %>/view"><%= name %></a>
+    </td>
+    <td><%= email %></td>
+    <td><%= guests %></td>
+    <td><% print(attend?"Yes":"No"); %></td>
+    <td>
+      <a href="#" class="delete btn btn-danger btn-small">delete</a>
+    </td>
+  </script>
+  <!-- the show template -->
+  <script type="text/template" id="showTemplate">
+    <div class="well">
+      <a class="btn btn-large" href="#rsvps/index">
+        Back To Index
+      </a>
+      <a class="btn btn-large btn-info" href="#rsvp/<%= id %>/edit">
+        Update RSVP
+      </a>
+    </div>
+    <h2>
+      <%= name %>
+    </h2>
+    <p style="white-space:pre-wrap;">Email: <%= email %></p>
+    <p style="white-space:pre-wrap;">Guests: <%= guests %></p>
+    <p style="white-space:pre-wrap;">Attending: <% print(attend?"Yes":"No"); %></p>
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var rsvps = new APP.Collections.RsvpCollection();
+      var router = router = new APP.Routers.RsvpRouter({rsvps: rsvps});
+      Backbone.history.start();
+
+      // could also bootstrap data with a JSP
+      //notes.reset(<%= rsvps (as JSON) %>);
+    });
+  </script>
+</body>
+</html>
