@@ -46,6 +46,7 @@ public class Rsvp {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	/**
 	 * @return the name
 	 */
