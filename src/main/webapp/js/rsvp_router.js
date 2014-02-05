@@ -22,24 +22,23 @@
 
     updateDebug: function () {
       $('#output').text(JSON.stringify(this.rsvps.toJSON(), null, 4));
-      // .animate({scrollTop: $('#offset').scrollHeight}, 1000);
     },
 
     create: function () {
-      this.currentView = new APP.Views.RsvpNewView({rsvps: this.rsvps, rsvp: new APP.Models.RsvpModel()});
-      $('#primary-content').html(this.currentView.render().el);
+      var currentView = new APP.Views.RsvpNewView({rsvps: this.rsvps, rsvp: new APP.Models.RsvpModel()});
+      $('#primary-content').html(currentView.render().el);
     },
 
     edit: function (id) {
       var rsvp = this.rsvps.get(id);
-      this.currentView = new APP.Views.RsvpEditView({rsvp: rsvp});
-      $('#primary-content').html(this.currentView.render().el);
+      var currentView = new APP.Views.RsvpEditView({rsvp: rsvp});
+      $('#primary-content').html(currentView.render().el);
     },
 
     show: function (id) {
       var rsvp = this.rsvps.get(id);
-      this.currentView = new APP.Views.RsvpShowView({rsvp: rsvp});
-      $('#primary-content').html(this.currentView.render().el);
+      var currentView = new APP.Views.RsvpShowView({rsvp: rsvp});
+      $('#primary-content').html(currentView.render().el);
     },
 
     index: function () {

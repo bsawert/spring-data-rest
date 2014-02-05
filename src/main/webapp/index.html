@@ -24,7 +24,7 @@
     </div>
 
     <p class="lead">
-      This a demo of Backbone.JS and Spring Data Rest
+      This a demo of Backbone.JS and Spring Data REST
     </p>
 
     <div class="row">
@@ -122,11 +122,10 @@
   <script type="text/javascript">
     $(document).ready(function() {
       var rsvps = new APP.Collections.RsvpCollection();
+      // could bootstrap data here with a JSP
+      // rsvps.reset(<%= (rsvps as JSON) %>);
       var router = router = new APP.Routers.RsvpRouter({rsvps: rsvps});
       Backbone.history.start();
-
-      // could also bootstrap data with a JSP
-      //notes.reset(<%= rsvps (as JSON) %>);
     });
   </script>
 </body>
