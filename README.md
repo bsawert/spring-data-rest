@@ -1,7 +1,7 @@
-spring-data-rest
-================
+#Example Backbone.js App with Spring Data REST
 
-This is a bare bones Spring data rest application, exposing a single entity.
+This is a bare bones application that integrates a Spring Data REST repository on the back end with a minimal Backbone.js front end. It demonstrates the changes needed for Backbone to parse the Spring Data REST JSON, and for Spring to send the entity ID that Backbone requires.
 
-It is configured to expose the entity ID for compatibility with a BackboneJS front end.
+The front end was adapted from David Morrow's excellent minimalist Backbone app. You can see his original at <https://github.com/dperrymorrow/example-backbone-app>.
+
 
